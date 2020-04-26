@@ -1,64 +1,71 @@
 # Reddit-Flair-Detector
-A Web App based on Python's micro web framework Flask which detects the flair (category) of a post on the subreddit [india](https://www.reddit.com/r/india/) by
-utilising the power of Natural Language Processing and Machine Learning.
-The app can be used here [Reddit Flair Detector](https://flask-reddit-flair.herokuapp.com/).
+A Reddit Flair Detector which detects and classifies the type of flair of a post on the [subreddit india](https://www.reddit.com/r/india/) based on five ML algoriths, namely Naive-Bayes, Linear Support Vector Machine, Logistic Regression, Random Forest, and Mulyi-Layer Perceptron Classifier.
+
+## Files And Directories
+[Data] contains database instance of raw data,its csv and the resulting data after cleaning and pre processing.
+
+[Finalized_Model] contains the finalized ML model which gave the maximum accuracy during testing.
+
+[Scripts] contains the the files used pre-deployment, that is, the code used for scraping reddit posts and training the model.
+
+[Project_Reddit_Flair.ipynb] contains the Jupyter Notebook to collect r/india data, pre-process it, train the models and test them using the mearsures including accuracy, precision, recall, f1-score, and support measures based on different features of flairs.
+
+[flask_app.py] is the main python file to run the flask web app on Heroku servers.
+
+[graph.html][index.html][post.html][result.html] These all the requires HTML files to make the Web Application.
+
+[Procfile] is the file required to connect the web app to heroku usiing Heroku CLI.
+
+[nltk.txt] contains 'stopwords' to be downloaded from the shell.
+
+[requirements.txt] lists all the dependencies required to run the project.
+contains the flask application deployed for heroku server.
 
 ## Working
 The user enters the url of the required post. The app takes the url, extracts various features from it (comments, authors, body .etc.)
 and tries to predict the flair using them by applying the finalized model.
 
-## Running on localhost
+## Execution on localhost
+1. Open the terminal.
 
-1 . clone into repository ```bash https://github.com/chandan21gupta/Reddit-Flair-Detector```.
+2 . Clone the repository ```get clone https://github.com/AshuKV/Reddit-Flair-Predictor.git```.
 
-2.  Create a virtual environment by the command ```bash virtualenv -p python3 env```.
+3.  Create a virtual environment by the command ```virtualenv -p python3 env```.
 
-3.  Go inside the cloned directory and enter command ```bash pip install -r requirements.txt```.
+4. Activate the ```env``` virtual environment by executing the following command: ```source env/bin/activate```.
 
-4. Go inside the Web directory and enter command ```bash Python3 flask_app.py``` to start the server. It can be found [here](https://github.com/chandan21gupta/Web). Simply clone into it.
+5. Inside the cloned directory, Enter command ```pip install -r requirements.txt```.
 
-## Files And Directories
-[Data](https://github.com/chandan21gupta/Reddit-Flair-Detector/tree/master/Data) contains mongodb instance of raw data,its csv and the resulting data after cleaning and pre processing. It also contains a script called graph.py that generates statistics for data.
+6. Go inside the Web directory and execute command ```python3 flask_app.py```, which will start the server. 
 
-[Finalized_Model](https://github.com/chandan21gupta/Reddit-Flair-Detector/tree/master/Finalised_model) contains the finalizes ML algorithm and combined data feature which gave the maximum accuracy during testing and training.
+7. Hit the ```IP Address``` on a web browser to use the app.
 
-Web contains the flask application deployed for heroku server.
+## Dependencies
+```requirements.txt``` contains the list of all the dependencies.
 
-[Scripts](https://github.com/chandan21gupta/Reddit-Flair-Detector/tree/master/scripts) contains the the files used pre deployment, that is, the code used for scraping reddit posts and training the Machine Learning ALgorithms.
+# Approach
 
-[sources.txt](https://github.com/chandan21gupta/Reddit-Flair-Detector/blob/master/sources.txt) lists the sources used for the entire project.
+The data was collected using the praw library in Python. The codebase is located in the [Scripts]. Only top ten comments were considered along with their authors. Total 50 posts were considered for data analysis for each of the 12 flairs considered as a part of the project.
 
-# Process
+The data includes ```title```, ```comments```, ```body```, ```url```,  ```author```, ```score```, ```id```, ```time-created``` and ```number of comments```. For ```comments```, only top level comments are considered in dataset and no sub-comments are present. The ```title```, ```comments``` and ```body``` were cleaned by removing bad symbols and stopwords using ```nltk```. Basically five types of standalone features were considered for training namely:
+1. ```Title```
+2. ```Comments```
+3. ```Urls```
+4. ```Body```
+5. Combining ```Title```, ```Comments``` and ```Urls``` as one feature.
 
-## Pre Deployment
+After the data collection, and going through various literatures available for Natural Language Processing and various classifiers, I got across [this](https://towardsdatascience.com/multi-class-text-classification-model-comparison-and-selection-5eb066197568) article which explained everything, from the data pre-processing to data analysis for text classification. The data was cleaned using textcleaning.py [Scripts], which I saved in a csv file.
 
-1. The data was collected using the praw library in Python.The codebase is located in the [Scripts](https://github.com/chandan21gupta/Reddit-Flair-Detector/tree/master/scripts) under the name reddit_webScrapper.py
-For comments - top ten comments were considered along with their authors. Total 100 posts are considered for data analysis. It is stored in a database using mongodb. 
-
-2. After the data collection, and going through various articles on internet about first step towards analysis of collected data, I got across [this](https://towardsdatascience.com/multi-class-text-classification-model-comparison-and-selection-5eb066197568) wonderful article which explained everything, from the data pre-processing to data analysis in Natural Language Processing. The data was cleaned using textcleaning.py [Scripts](https://github.com/chandan21gupta/Reddit-Flair-Detector/tree/master/scripts), which I saved in a csv file (cleaned_dataset.csv). 
-
-3. After cleaning the data, various ML algorithms were trained with testing and training dataset in the ratio 3:7.
-
-### Features
-First standalone features were tried like comments, title, body, url .etc. However the accuracy was not upto the mark.
-The average accuracy remained around 50-55%.
-After that, many features were combined on the basis of their standlone accuracies. The combination of features that gave the best accuracy (60-65%) was that of title,comments,url and body, with Logistic Regression giving the best accuracy(66%).
-After that, the training and tesing ratio was increased to improve the model (9:1), since the data was sparse.
-
-Basically five ML algorithms were used:
+After cleaning the data, various ML algorithms were trained with training and testing dataset in the ratio 7:3. Basically five ML algorithms were used:
  1. Naive Bayes
  2. Linear Suport Vector Machine
  3. Logistic Regression
  4. Random Forest
  5. Multi Layer Perceptron
-
-## During Deployment
-
-A flask app was made with two routes - "/" the home route, "/action_page" for displaying the predicted flair, "/stats" for statistics.
-
-#### Note - Only Web directory has been deployed to heroku, as others were just initial scripts for data analysis.
-
-## Dependencies
-requirements.txt contains the list of all the dependencies.
+ 
+Training and Testing on the dataset showed the Logistic Regression showed the best accuracy of 66% when trained on the combination of ```Title``` +  ```Comments``` + ```Url``` feature. The best model was saved using ```pickle``` library, which was used further for prediction of the flair from the URL of the post using the web app.
 
 
+## Deployment
+
+A flask app was made with these routes - ```/``` the home route, ```/action_page``` for displaying the predicted flair, and ```/stats``` for statistics, later which was deployed to Heroku servers using the ```flask_app.py```,  ```Procfile```, ```.gitignore``` and ```requirement.txt``` files.
