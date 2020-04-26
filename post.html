@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+	{% block form %}
+		<form method="POST" action="/action_page">
+			 
+		    	<label for="Posturl" style="display: block;text-align: center;">Enter URL</label>
+		    	<input type="text" class="form-control" id="Posturl" name="Posturl" placeholder="URL">
+		    	<br>
+		    	<div class="form-actions">
+		    		<button class="massive ui primary button" type="submit">Submit</button>
+		  		</div>
+	  	</form>
+
+	  	<form method = "GET" action="/stats">
+	  		<div class="form-actions">
+		    	<button class="massive ui primary button" type="submit">Statistics</button>
+		  	</div>
+	  	</form>
+
+	 {% endblock %}

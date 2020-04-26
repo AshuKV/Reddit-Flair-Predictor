@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reddit Flair Detector</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+	<link rel="stylesheet" href="/static/styles/style.css">
+</head>
+<body>
+	<div class="container">
+	<div class="jumbotron">
+  			<h1 style="text-align: center;">Reddit Flair Detector</h1>
+  			<p style="text-align: center;">This application tries to predict the flair (category) of a post on the subreddit <a href="https://www.reddit.com/r/india/">india</a></p> 
+		{% block form %}{% endblock %}
+	  	{% block ans %}{% endblock %}
+  	</div>
+  	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/app.js"></script>
+</body>
+</html>
