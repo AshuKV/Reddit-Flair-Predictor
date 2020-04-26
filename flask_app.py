@@ -6,7 +6,7 @@ import praw
 from praw.models import MoreComments
 
 LOG = pickle.load(open('model_LOGREG.sav','rb'))
-reddit = praw.Reddit(client_id = "0hliVZBlDhlipQ",client_secret = "pjUJDMMXhYaEmyJaLkQYb_2Fccg",user_agent = "Reddit Flair Detector",username = "chandan21121998",password = "Chandan@1234")
+reddit = praw.Reddit(client_id = "",client_secret = "",user_agent = "",username = "",password = "")
 
 def prediction(url):
 	submission = reddit.submission(url = url)
