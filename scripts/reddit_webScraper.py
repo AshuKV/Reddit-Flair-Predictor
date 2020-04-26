@@ -15,7 +15,7 @@ mycol = db["subreddits"]
 
 
 #OAuth with reddit API.
-reddit = praw.Reddit(client_id = "0hliVZBlDhlipQ",client_secret = "pjUJDMMXhYaEmyJaLkQYb_2Fccg",user_agent = "Reddit Flair Detector",username = "chandan21121998",password = "Chandan@1234")
+reddit = praw.Reddit(client_id = "F7Tj27YBPXb1Bw",client_secret = "d9HY3XFSHxOssTmZ1uZPfj6op1c",user_agent = "ashuv",username = "Ashuv12",password = "Priy@m@123")
 #Subreddit of which data is to be scraped.
 subreddit = reddit.subreddit('india')
 
