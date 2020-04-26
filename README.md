@@ -30,7 +30,7 @@ The user enters the url of the required post. The app takes the url, extracts va
 
 1. Open the terminal.
 
-2. Clone the repository ```get clone https://github.com/AshuKV/Reddit-Flair-Predictor.git```.
+2. Clone the repository ```git clone https://github.com/AshuKV/Reddit-Flair-Predictor.git```.
 
 3.  Create a virtual environment by the command ```virtualenv -p python3 env```.
 
