@@ -6,7 +6,7 @@ import praw
 from praw.models import MoreComments
 
 LOG = pickle.load(open('model_LOGREG.sav','rb'))
-reddit = praw.Reddit(client_id = "",client_secret = "",user_agent = "",username = "",password = "")
+reddit = praw.Reddit(client_id = "F7Tj27YBPXb1Bw",client_secret = "d9HY3XFSHxOssTmZ1uZPfj6op1c",user_agent = "ashuv",username = "Ashuv12",password = "Priy@m@123")
 
 def prediction(url):
 	submission = reddit.submission(url = url)
@@ -38,17 +38,31 @@ def prediction(url):
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import json
+import requests
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-   	return  render_template('post.html')
+   	return render_template('post.html')
 
 @app.route("/action_page",methods=['POST'])
 def action(flair=None):
 	text = request.form.get('Posturl',False)
 	flair = str(prediction(text))
 	return render_template('result.html',flair=str(flair))
+
+@app.route("/automated_testing",methods=['POST'])
+def endp(flair=None):
+	files = {'upload_file': open('file.txt','rb')}
+	url = request.form.get('Posturl',False)
+	r = requests.post(url, files=files)
+	data={}
+	for req in r:
+		flair = str(prediction(r))
+		data[req]=flair
+	json_data=json.dumps(data)
+	return json_data 
 
 @app.route("/stats")
 def stats():
