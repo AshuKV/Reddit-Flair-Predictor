@@ -1,5 +1,5 @@
 # Reddit-Flair-Detector
-A Reddit Flair Detector which detects and classifies the type of flair of a post on the [subreddit india](https://www.reddit.com/r/india/) based on five ML algoriths, namely Naive-Bayes, Linear Support Vector Machine, Logistic Regression, Random Forest, and Mulyi-Layer Perceptron Classifier.
+A Reddit Flair Detector which detects and classifies the type of flair of a post on the [subreddit india](https://www.reddit.com/r/india/) based on five ML algorithms, namely Naive-Bayes, Linear Support Vector Machine, Logistic Regression, Random Forest, and Mulyi-Layer Perceptron Classifier.
 
 
 ## Files And Directories
